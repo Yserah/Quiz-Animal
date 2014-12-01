@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace Quiz_Animal
 {
     public partial class QuizAnimal : Form
     {
+        public int IndexLblReponse = 1; // Ou que la reponse est sur les labels du quiz.
+
         public QuizAnimal()
         {
             InitializeComponent();
@@ -30,7 +33,7 @@ namespace Quiz_Animal
 
         private void QuizAnimal_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = Image.FromFile(@"test\t1.jpg");
+            pictureBox1.Image = Image.FromFile(@"Images\t1.jpg");
         }
         private void Onglet_KeyDown(object sender, KeyEventArgs e)
         {
@@ -43,19 +46,28 @@ namespace Quiz_Animal
         private void rbChien_CheckedChanged(object sender, EventArgs e)
         {
             if (rbChien.Checked)
-                pictureBox3.Image = Image.FromFile(@"test\chien.jpg");
+            {
+                pictureBox3.Image = Image.FromFile(@"Images\chien.jpg");
+                comboBox1.Text = "Chien";
+            }
         }
 
         private void rbPokemon_CheckedChanged(object sender, EventArgs e)
         {
             if (rbPokemon.Checked)
-                pictureBox3.Image = Image.FromFile(@"test\pokemon.jpg");
+            {
+                pictureBox3.Image = Image.FromFile(@"Images\pokemon.jpg");
+                comboBox1.Text = "Pokemon";
+            }
         }
 
         private void rbChat_CheckedChanged(object sender, EventArgs e)
         {
             if (rbChat.Checked)
-                pictureBox3.Image = Image.FromFile(@"test\chat.jpg");
+            {
+                pictureBox3.Image = Image.FromFile(@"Images\chat.jpg");
+                comboBox1.Text = "Chat";
+            }
         }
 
         private void Onglet_SelectedIndexChanged(object sender, EventArgs e)
@@ -73,6 +85,101 @@ namespace Quiz_Animal
                 }
             }
         }
+
+        private void lblReponse1_Click(object sender, EventArgs e)
+        {
+            if (IndexLblReponse == 1) // Reponse Bonne
+            {
+                lblReponse1.BackColor = Color.PaleGreen;
+            }
+            else // Reponse pas bonne
+            {
+                lblReponse1.BackColor = Color.IndianRed;
+
+                if (IndexLblReponse == 2)
+                {
+                    lblReponse2.BackColor = Color.PaleGreen;
+                }
+                if (IndexLblReponse == 3)
+                {
+                    lblReponse3.BackColor = Color.PaleGreen;
+                }
+            }
+        }
+
+        private void lblReponse2_Click(object sender, EventArgs e)
+        {
+            if (IndexLblReponse == 2) // Reponse Bonne
+            {
+                lblReponse2.BackColor = Color.PaleGreen;
+            }
+            else // Reponse pas bonne
+            {
+                lblReponse2.BackColor = Color.IndianRed;
+
+                if (IndexLblReponse == 1)
+                {
+                    lblReponse1.BackColor = Color.PaleGreen;
+                }
+                if (IndexLblReponse == 3)
+                {
+                    lblReponse3.BackColor = Color.PaleGreen;
+                }
+            }
+        }
+
+        private void lblReponse3_Click(object sender, EventArgs e)
+        {
+            if (IndexLblReponse == 3) // Reponse Bonne
+            {
+                lblReponse3.BackColor = Color.PaleGreen;
+            }
+            else // Reponse pas bonne
+            {
+                lblReponse3.BackColor = Color.IndianRed;
+
+                if (IndexLblReponse == 1)
+                {
+                    lblReponse1.BackColor = Color.PaleGreen;
+                }
+                if (IndexLblReponse == 2)
+                {
+                    lblReponse2.BackColor = Color.PaleGreen;
+                }
+            }
+        }
+
+        private void btnDemarrer_Click(object sender, EventArgs e)
+        {
+            btnDemarrer.Text = "Arreter";
+
+            // Changer le texte des lbl par un la reponse aleatoirement ... Et deux autres reponses aleatoires dans la base de donnée;
+
+
+
+            lblReponse1.Visible = true;
+            lblReponse2.Visible = true;
+            lblReponse3.Visible = true;
+
+        }
+
+        private void btnAjouter_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.Text == "Chat")
+            {
+                File.Copy(txtParcourrir.Text, @"Images\Chat\" + txtNom.Text + ".jpg");
+            }
+            if (comboBox1.Text == "Chien")
+            {
+                File.Copy(txtParcourrir.Text, @"Images\Chien\" + txtNom.Text + ".jpg");
+            }
+            if (comboBox1.Text == "Pokemon")
+            {
+                File.Copy(txtParcourrir.Text, @"Images\Pokemon\" + txtNom.Text + ".jpg");
+            }
+        }
+
+
 
     }
 }
