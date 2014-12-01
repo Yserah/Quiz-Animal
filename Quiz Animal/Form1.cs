@@ -17,40 +17,62 @@ namespace Quiz_Animal
             InitializeComponent();
         }
 
-        private void Ok_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void parcourrir_Click(object sender, EventArgs e)
         {
-
             OpenFileDialog dialog = new OpenFileDialog();
-
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 txtParcourrir.Text = dialog.FileName;
                 pictureBox2.Image = Image.FromFile(dialog.FileName);
                 pictureBox1.Image = Image.FromFile(dialog.FileName);
-
             }
         }
 
         private void QuizAnimal_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = Image.FromFile(@"C:\Users\YserahScythe\Pictures\21677_10200149630331545_910023648_n.jpg");
+            pictureBox1.Image = Image.FromFile(@"test\t1.jpg");
         }
         private void Onglet_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
-                QuizAnimal.ActiveForm.Close();
+                Application.Exit();
             }
         }
 
-        
+        private void rbChien_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbChien.Checked)
+                pictureBox3.Image = Image.FromFile(@"test\chien.jpg");
+        }
 
-        
-        
+        private void rbPokemon_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbPokemon.Checked)
+                pictureBox3.Image = Image.FromFile(@"test\pokemon.jpg");
+        }
+
+        private void rbChat_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbChat.Checked)
+                pictureBox3.Image = Image.FromFile(@"test\chat.jpg");
+        }
+
+        private void Onglet_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Onglet.SelectedIndex != 0)
+            {
+                if (rbChat.Checked == true || rbChien.Checked == true || rbPokemon.Checked == true)
+                {
+
+                }
+                else
+                {
+                    Onglet.SelectedIndex = 0;
+                    MessageBox.Show("Veuiller choisir un questionnaire !", "QUESTIONNAIRE !");
+                }
+            }
+        }
+
     }
 }
