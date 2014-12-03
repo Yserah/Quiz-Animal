@@ -14,16 +14,17 @@ using MongoDB.Driver.Linq;
 
 namespace Quiz_Animal
 {
-    public class ImagesQuiz
-    {
-        public ObjectId Id { get; set; }
-        public string Nom { get; set; }
-        public string Details { get; set; }
-        public string Path { get; set; }
 
-    }
     public partial class QuizAnimal : Form
     {
+        public class ImagesQuiz
+        {
+            public ObjectId Id { get; set; }
+            public string Nom { get; set; }
+            public string Details { get; set; }
+            public string Path { get; set; }
+
+        }
         public int IndexLblReponse = 1; // Ou que la reponse est sur les labels du quiz.
 
         public QuizAnimal()
@@ -206,18 +207,20 @@ namespace Quiz_Animal
                         File.Copy(txtParcourrir.Text, @"Images\Pokemon\" + txtNom.Text + "-" + txtDescriptions.Text + "-.jpg");
                     }
                 }
-            }else
+            }
+            else
             {
-                if(txtNom == null)
+                if (txtNom == null)
                 {
                     MessageBox.Show("Entrez un nom");
                 }
 
-                if(pictureBox2.Image == null)
+                if (pictureBox2.Image == null)
                 {
                     MessageBox.Show("Pas d'image");
                 }
             }
         }
     }
+
 }
