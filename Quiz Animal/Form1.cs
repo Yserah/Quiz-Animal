@@ -8,9 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace Quiz_Animal
 {
+    public class ImagesQuiz
+    {
+        public ObjectId Id { get; set; }
+        public string Nom { get; set; }
+        public string Details { get; set; }
+        public string Path { get; set; }
+
+    }
     public partial class QuizAnimal : Form
     {
         public int IndexLblReponse = 1; // Ou que la reponse est sur les labels du quiz.
@@ -34,6 +45,12 @@ namespace Quiz_Animal
         private void QuizAnimal_Load(object sender, EventArgs e)
         {
             pictureBox1.Image = Image.FromFile(@"Images\t1.jpg");
+
+            // The mongodb 
+
+
+
+
         }
         private void Onglet_KeyDown(object sender, KeyEventArgs e)
         {
@@ -165,21 +182,42 @@ namespace Quiz_Animal
 
         private void btnAjouter_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "Chat")
+
+            if (pictureBox2.Image != null && txtNom != null)
             {
-                File.Copy(txtParcourrir.Text, @"Images\Chat\" + txtNom.Text + ".jpg");
-            }
-            if (comboBox1.Text == "Chien")
+                if (!(File.Exists(@"Images\Chat\" + txtNom.Text + "-" + txtDescriptions.Text + "-.jpg")))
+                {
+                    if (comboBox1.Text == "Chat")
+                    {
+                        File.Copy(txtParcourrir.Text, @"Images\Chat\" + txtNom.Text + "-" + txtDescriptions.Text + "-.jpg");
+                    }
+                }
+                if (!(File.Exists(@"Images\Chat\" + txtNom.Text + "-" + txtDescriptions.Text + "-.jpg")))
+                {
+                    if (comboBox1.Text == "Chien")
+                    {
+                        File.Copy(txtParcourrir.Text, @"Images\Chien\" + txtNom.Text + "-" + txtDescriptions.Text + "-.jpg");
+                    }
+                }
+                if (!(File.Exists(@"Images\Chat\" + txtNom.Text + "-" + txtDescriptions.Text + "-.jpg")))
+                {
+                    if (comboBox1.Text == "Pokemon")
+                    {
+                        File.Copy(txtParcourrir.Text, @"Images\Pokemon\" + txtNom.Text + "-" + txtDescriptions.Text + "-.jpg");
+                    }
+                }
+            }else
             {
-                File.Copy(txtParcourrir.Text, @"Images\Chien\" + txtNom.Text + ".jpg");
-            }
-            if (comboBox1.Text == "Pokemon")
-            {
-                File.Copy(txtParcourrir.Text, @"Images\Pokemon\" + txtNom.Text + ".jpg");
+                if(txtNom == null)
+                {
+                    MessageBox.Show("Entrez un nom");
+                }
+
+                if(pictureBox2.Image == null)
+                {
+                    MessageBox.Show("Pas d'image");
+                }
             }
         }
-
-
-
     }
 }

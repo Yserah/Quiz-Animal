@@ -35,6 +35,8 @@
             this.rbPokemon = new System.Windows.Forms.RadioButton();
             this.rbChien = new System.Windows.Forms.RadioButton();
             this.QuizTab = new System.Windows.Forms.TabPage();
+            this.txtrichDetails = new System.Windows.Forms.RichTextBox();
+            this.bntSuivant = new System.Windows.Forms.Button();
             this.lblNumber = new System.Windows.Forms.Label();
             this.lblPoint = new System.Windows.Forms.Label();
             this.lblReponse3 = new System.Windows.Forms.Label();
@@ -43,6 +45,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnDemarrer = new System.Windows.Forms.Button();
             this.Parcourir = new System.Windows.Forms.TabPage();
+            this.txtNom = new System.Windows.Forms.TextBox();
+            this.lblNom = new System.Windows.Forms.Label();
+            this.txtDescriptions = new System.Windows.Forms.RichTextBox();
             this.lblDetails = new System.Windows.Forms.Label();
             this.lblSerie = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -51,11 +56,6 @@
             this.parcourrir = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.bntSuivant = new System.Windows.Forms.Button();
-            this.txtrichDetails = new System.Windows.Forms.RichTextBox();
-            this.lblNom = new System.Windows.Forms.Label();
-            this.txtNom = new System.Windows.Forms.TextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.Onglet.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -88,7 +88,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(538, 456);
+            this.tabPage1.Size = new System.Drawing.Size(626, 486);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Choix questionnaire !";
             // 
@@ -152,6 +152,25 @@
             this.QuizTab.Size = new System.Drawing.Size(626, 486);
             this.QuizTab.TabIndex = 0;
             this.QuizTab.Text = "Quiz !";
+            // 
+            // txtrichDetails
+            // 
+            this.txtrichDetails.Location = new System.Drawing.Point(424, 253);
+            this.txtrichDetails.Name = "txtrichDetails";
+            this.txtrichDetails.ReadOnly = true;
+            this.txtrichDetails.Size = new System.Drawing.Size(196, 227);
+            this.txtrichDetails.TabIndex = 13;
+            this.txtrichDetails.Text = "";
+            // 
+            // bntSuivant
+            // 
+            this.bntSuivant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntSuivant.Location = new System.Drawing.Point(6, 403);
+            this.bntSuivant.Name = "bntSuivant";
+            this.bntSuivant.Size = new System.Drawing.Size(75, 42);
+            this.bntSuivant.TabIndex = 12;
+            this.bntSuivant.Text = "Suivant";
+            this.bntSuivant.UseVisualStyleBackColor = true;
             // 
             // lblNumber
             // 
@@ -232,7 +251,7 @@
             // 
             this.Parcourir.Controls.Add(this.txtNom);
             this.Parcourir.Controls.Add(this.lblNom);
-            this.Parcourir.Controls.Add(this.richTextBox2);
+            this.Parcourir.Controls.Add(this.txtDescriptions);
             this.Parcourir.Controls.Add(this.lblDetails);
             this.Parcourir.Controls.Add(this.lblSerie);
             this.Parcourir.Controls.Add(this.comboBox1);
@@ -246,6 +265,32 @@
             this.Parcourir.Size = new System.Drawing.Size(626, 486);
             this.Parcourir.TabIndex = 1;
             this.Parcourir.Text = "Ajouter une nouvelle image !";
+            // 
+            // txtNom
+            // 
+            this.txtNom.Location = new System.Drawing.Point(437, 32);
+            this.txtNom.MaxLength = 25;
+            this.txtNom.Name = "txtNom";
+            this.txtNom.Size = new System.Drawing.Size(100, 20);
+            this.txtNom.TabIndex = 11;
+            // 
+            // lblNom
+            // 
+            this.lblNom.AutoSize = true;
+            this.lblNom.Location = new System.Drawing.Point(434, 15);
+            this.lblNom.Name = "lblNom";
+            this.lblNom.Size = new System.Drawing.Size(32, 13);
+            this.lblNom.TabIndex = 10;
+            this.lblNom.Text = "Nom:";
+            // 
+            // txtDescriptions
+            // 
+            this.txtDescriptions.Location = new System.Drawing.Point(437, 130);
+            this.txtDescriptions.MaxLength = 150;
+            this.txtDescriptions.Name = "txtDescriptions";
+            this.txtDescriptions.Size = new System.Drawing.Size(161, 69);
+            this.txtDescriptions.TabIndex = 9;
+            this.txtDescriptions.Text = "";
             // 
             // lblDetails
             // 
@@ -314,49 +359,6 @@
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
-            // bntSuivant
-            // 
-            this.bntSuivant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bntSuivant.Location = new System.Drawing.Point(6, 403);
-            this.bntSuivant.Name = "bntSuivant";
-            this.bntSuivant.Size = new System.Drawing.Size(75, 42);
-            this.bntSuivant.TabIndex = 12;
-            this.bntSuivant.Text = "Suivant";
-            this.bntSuivant.UseVisualStyleBackColor = true;
-            // 
-            // txtrichDetails
-            // 
-            this.txtrichDetails.Location = new System.Drawing.Point(424, 253);
-            this.txtrichDetails.Name = "txtrichDetails";
-            this.txtrichDetails.ReadOnly = true;
-            this.txtrichDetails.Size = new System.Drawing.Size(196, 227);
-            this.txtrichDetails.TabIndex = 13;
-            this.txtrichDetails.Text = "";
-            // 
-            // lblNom
-            // 
-            this.lblNom.AutoSize = true;
-            this.lblNom.Location = new System.Drawing.Point(434, 15);
-            this.lblNom.Name = "lblNom";
-            this.lblNom.Size = new System.Drawing.Size(32, 13);
-            this.lblNom.TabIndex = 10;
-            this.lblNom.Text = "Nom:";
-            // 
-            // txtNom
-            // 
-            this.txtNom.Location = new System.Drawing.Point(437, 32);
-            this.txtNom.Name = "txtNom";
-            this.txtNom.Size = new System.Drawing.Size(100, 20);
-            this.txtNom.TabIndex = 11;
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Location = new System.Drawing.Point(437, 130);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(161, 69);
-            this.richTextBox2.TabIndex = 9;
-            this.richTextBox2.Text = "";
-            // 
             // QuizAnimal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -409,7 +411,7 @@
         private System.Windows.Forms.RichTextBox txtrichDetails;
         private System.Windows.Forms.Label lblNom;
         private System.Windows.Forms.TextBox txtNom;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox txtDescriptions;
     }
 }
 
