@@ -36,7 +36,7 @@
             this.rbChien = new System.Windows.Forms.RadioButton();
             this.QuizTab = new System.Windows.Forms.TabPage();
             this.txtrichDetails = new System.Windows.Forms.RichTextBox();
-            this.bntSuivant = new System.Windows.Forms.Button();
+            this.btnSuivant = new System.Windows.Forms.Button();
             this.lblNumber = new System.Windows.Forms.Label();
             this.lblPoint = new System.Windows.Forms.Label();
             this.lblReponse3 = new System.Windows.Forms.Label();
@@ -104,6 +104,7 @@
             // 
             // rbChat
             // 
+            this.rbChat.AccessibleName = "Chats";
             this.rbChat.AutoSize = true;
             this.rbChat.Location = new System.Drawing.Point(151, 8);
             this.rbChat.Name = "rbChat";
@@ -115,6 +116,7 @@
             // 
             // rbPokemon
             // 
+            this.rbPokemon.AccessibleName = "Pokemons";
             this.rbPokemon.AutoSize = true;
             this.rbPokemon.Location = new System.Drawing.Point(289, 8);
             this.rbPokemon.Name = "rbPokemon";
@@ -126,6 +128,7 @@
             // 
             // rbChien
             // 
+            this.rbChien.AccessibleName = "Chiens";
             this.rbChien.AutoSize = true;
             this.rbChien.Location = new System.Drawing.Point(7, 7);
             this.rbChien.Name = "rbChien";
@@ -138,7 +141,7 @@
             // QuizTab
             // 
             this.QuizTab.Controls.Add(this.txtrichDetails);
-            this.QuizTab.Controls.Add(this.bntSuivant);
+            this.QuizTab.Controls.Add(this.btnSuivant);
             this.QuizTab.Controls.Add(this.lblNumber);
             this.QuizTab.Controls.Add(this.lblPoint);
             this.QuizTab.Controls.Add(this.lblReponse3);
@@ -162,15 +165,16 @@
             this.txtrichDetails.TabIndex = 13;
             this.txtrichDetails.Text = "";
             // 
-            // bntSuivant
+            // btnSuivant
             // 
-            this.bntSuivant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bntSuivant.Location = new System.Drawing.Point(6, 403);
-            this.bntSuivant.Name = "bntSuivant";
-            this.bntSuivant.Size = new System.Drawing.Size(75, 42);
-            this.bntSuivant.TabIndex = 12;
-            this.bntSuivant.Text = "Suivant";
-            this.bntSuivant.UseVisualStyleBackColor = true;
+            this.btnSuivant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSuivant.Location = new System.Drawing.Point(6, 415);
+            this.btnSuivant.Name = "btnSuivant";
+            this.btnSuivant.Size = new System.Drawing.Size(75, 42);
+            this.btnSuivant.TabIndex = 12;
+            this.btnSuivant.Text = "Suivant";
+            this.btnSuivant.UseVisualStyleBackColor = true;
+            this.btnSuivant.Click += new System.EventHandler(this.btnSuivant_Click);
             // 
             // lblNumber
             // 
@@ -312,14 +316,16 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Chien",
             "Chat",
+            "Chien",
             "Pokemon"});
             this.comboBox1.Location = new System.Drawing.Point(437, 80);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(159, 21);
+            this.comboBox1.Sorted = true;
             this.comboBox1.TabIndex = 4;
             // 
             // btnAjouter
@@ -407,7 +413,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnDemarrer;
         private System.Windows.Forms.Label lblNumber;
-        private System.Windows.Forms.Button bntSuivant;
+        private System.Windows.Forms.Button btnSuivant;
         private System.Windows.Forms.RichTextBox txtrichDetails;
         private System.Windows.Forms.Label lblNom;
         private System.Windows.Forms.TextBox txtNom;

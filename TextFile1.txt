@@ -1,0 +1,11 @@
+ var client = new MongoClient("mongodb://localhost");
+
+            var serveur = client.GetServer();
+
+            var database = serveur.GetDatabase("QuizAnimal");
+
+                var pokemons = database.GetCollection<ImagesQuiz>("Pokemon");
+
+                var lastId = (from c in pokemons.AsQueryable<ImagesQuiz>() orderby c.Id select c).Last().Path;
+
+                pictureBox3.Image = Image.FromFile( lastId);
