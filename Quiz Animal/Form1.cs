@@ -15,7 +15,7 @@ using MongoDB.Driver.Builders;
 
 namespace Quiz_Animal
 {
-
+    // mongod --dbpath "
     public partial class QuizAnimal : Form
     {
         // Variable Global
@@ -23,6 +23,9 @@ namespace Quiz_Animal
         string NameRadioButtonSelect; // Nom du radio button qui est select.
         public int IndexLblReponse = 1; // Ou que la reponse est sur les labels du quiz.
         public int Point = 0; // Calcul des points 
+        bool dejaclick = true; // Permet de savoir si on a déja clicker ou non.
+        int indexprecedent = -1; // Permet de garder en mémoire le dernier élément choisi. 
+
 
         public class ImagesQuiz
         {
@@ -121,6 +124,7 @@ namespace Quiz_Animal
 
                 chats.Insert(new ImagesQuiz { Id = i, Nom = Split2[0], Details = Split2[1], Path = files_chats1[i] });
             }
+            MessageBox.Show(pokemons.Count() + " ," + chiens.Count() + " ," + chats.Count());
         }
         private void Onglet_KeyDown(object sender, KeyEventArgs e)
         {
@@ -188,18 +192,22 @@ namespace Quiz_Animal
                     lblReponse1.BackColor = Color.PaleGreen;
                     Point++;
                     lblNumber.Text = Point.ToString();
+                    dejaclick = false;
                 }
                 else // Reponse pas bonne
                 {
-                    lblReponse1.BackColor = Color.IndianRed;
+                    if (dejaclick)
+                    {
+                        lblReponse1.BackColor = Color.IndianRed;
 
-                    if (IndexLblReponse == 2)
-                    {
-                        lblReponse2.BackColor = Color.PaleGreen;
-                    }
-                    if (IndexLblReponse == 3)
-                    {
-                        lblReponse3.BackColor = Color.PaleGreen;
+                        if (IndexLblReponse == 2)
+                        {
+                            lblReponse2.BackColor = Color.PaleGreen;
+                        }
+                        if (IndexLblReponse == 3)
+                        {
+                            lblReponse3.BackColor = Color.PaleGreen;
+                        }
                     }
                 } 
             }
@@ -214,19 +222,22 @@ namespace Quiz_Animal
                     lblReponse2.BackColor = Color.PaleGreen;
                     Point++;
                     lblNumber.Text = Point.ToString();
-
+                    dejaclick = false;
                 }
                 else // Reponse pas bonne
                 {
-                    lblReponse2.BackColor = Color.IndianRed;
+                    if (dejaclick)
+                    {
+                        lblReponse2.BackColor = Color.IndianRed;
 
-                    if (IndexLblReponse == 1)
-                    {
-                        lblReponse1.BackColor = Color.PaleGreen;
-                    }
-                    if (IndexLblReponse == 3)
-                    {
-                        lblReponse3.BackColor = Color.PaleGreen;
+                        if (IndexLblReponse == 1)
+                        {
+                            lblReponse1.BackColor = Color.PaleGreen;
+                        }
+                        if (IndexLblReponse == 3)
+                        {
+                            lblReponse3.BackColor = Color.PaleGreen;
+                        }
                     }
                 } 
             }
@@ -241,18 +252,22 @@ namespace Quiz_Animal
                     lblReponse3.BackColor = Color.PaleGreen;
                     Point++;
                     lblNumber.Text = Point.ToString();
+                    dejaclick = false;
                 }
                 else // Reponse pas bonne
                 {
-                    lblReponse3.BackColor = Color.IndianRed;
+                    if (dejaclick)
+                    {
+                        lblReponse3.BackColor = Color.IndianRed;
 
-                    if (IndexLblReponse == 1)
-                    {
-                        lblReponse1.BackColor = Color.PaleGreen;
-                    }
-                    if (IndexLblReponse == 2)
-                    {
-                        lblReponse2.BackColor = Color.PaleGreen;
+                        if (IndexLblReponse == 1)
+                        {
+                            lblReponse1.BackColor = Color.PaleGreen;
+                        }
+                        if (IndexLblReponse == 2)
+                        {
+                            lblReponse2.BackColor = Color.PaleGreen;
+                        }
                     }
                 } 
             }
@@ -276,7 +291,7 @@ namespace Quiz_Animal
 
                 var BD = database.GetCollection<ImagesQuiz>(NameRadioButtonSelect);
 
-                if (BD.Count() <= 3)
+                if (BD.Count() >= 3)
                 {
                     btnDemarrer.Text = "Arreter";
 
@@ -289,6 +304,9 @@ namespace Quiz_Animal
                     int RandomLbl = random.Next(1, 4);
 
                     int RandomId = random.Next(Convert.ToInt32(BD.Count()));
+
+                    indexprecedent = RandomId;
+
 
                     MemoryId[0] = RandomId;
 
@@ -404,7 +422,7 @@ namespace Quiz_Animal
 
         private void btnSuivant_Click(object sender, EventArgs e)
         {
-
+            dejaclick = true;
             lblReponse1.BackColor = SystemColors.Control;
             lblReponse2.BackColor = SystemColors.Control;
             lblReponse3.BackColor = SystemColors.Control;
@@ -424,6 +442,11 @@ namespace Quiz_Animal
             int RandomLbl = random.Next(1, 4);
 
             int RandomId = random.Next(Convert.ToInt32(BD.Count()));
+
+            while (RandomId == indexprecedent)
+                RandomId = random.Next(Convert.ToInt32(BD.Count()));
+
+            indexprecedent = RandomId;
 
             MemoryId[0] = RandomId;
 
