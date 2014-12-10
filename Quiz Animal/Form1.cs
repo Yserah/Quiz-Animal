@@ -45,7 +45,7 @@ namespace Quiz_Animal
 
 
 
-        private void parcourrir_Click(object sender, EventArgs e)
+        private void parcourrir_Click(object sender, EventArgs e) // Parcourrir les dossiers.
         {
             OpenFileDialog dialog = new OpenFileDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -58,7 +58,7 @@ namespace Quiz_Animal
 
         private void QuizAnimal_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = Image.FromFile(@"Images\t1.jpg");
+            pictureBox1.Image = Image.FromFile(@"Images\t1.jpg"); //Afficher la picture box dans le quiz
 
             // The mongodb 
 
@@ -76,9 +76,12 @@ namespace Quiz_Animal
             var pokemons = database.GetCollection<ImagesQuiz>("Pokemons");
             pokemons.RemoveAll();
 
+            // Le split des noms de fichiers.
+
+
             string[] files_pokemons1 = Directory.GetFiles(@"Images\Pokemon\");
 
-            string[] files_pokemons2 = new string[files_pokemons1.Count()];
+            string[] files_pokemons2 = new string[files_pokemons1.Count()]; 
 
             for (int i = 0; i < files_pokemons1.Count(); ++i)
             {
@@ -124,9 +127,9 @@ namespace Quiz_Animal
 
                 chats.Insert(new ImagesQuiz { Id = i, Nom = Split2[0], Details = Split2[1], Path = files_chats1[i] });
             }
-            MessageBox.Show(pokemons.Count() + " ," + chiens.Count() + " ," + chats.Count());
+            
         }
-        private void Onglet_KeyDown(object sender, KeyEventArgs e)
+        private void Onglet_KeyDown(object sender, KeyEventArgs e) // Pour de la rapidité avec le escape.
         {
             if (e.KeyCode == Keys.Escape)
             {
@@ -134,7 +137,7 @@ namespace Quiz_Animal
             }
         }
 
-        private void rbChien_CheckedChanged(object sender, EventArgs e)
+        private void rbChien_CheckedChanged(object sender, EventArgs e) // Les check qui change.
         {
             if (rbChien.Checked)
             {
@@ -167,7 +170,7 @@ namespace Quiz_Animal
             }
         }
 
-        private void Onglet_SelectedIndexChanged(object sender, EventArgs e)
+        private void Onglet_SelectedIndexChanged(object sender, EventArgs e) // L'onglet qui change.
         {
             if (Onglet.SelectedIndex != 0)
             {
@@ -277,11 +280,12 @@ namespace Quiz_Animal
         {
             if (btnDemarrer.Text == "Demarrer")
             {
+                // Les couleurs de label par defaut
                 lblReponse1.BackColor = SystemColors.Control;
                 lblReponse2.BackColor = SystemColors.Control;
                 lblReponse3.BackColor = SystemColors.Control;
-                Point = 0;
-                lblNumber.Text = "0";
+                Point = 0; // LEs points 
+                lblNumber.Text = "0"; // Le Label des points
 
                 var client = new MongoClient("mongodb://localhost");
 
@@ -290,7 +294,7 @@ namespace Quiz_Animal
                 var database = serveur.GetDatabase("QuizAnimal");
 
                 var BD = database.GetCollection<ImagesQuiz>(NameRadioButtonSelect);
-
+                // Compte sil a plus que 3 pour les labels
                 if (BD.Count() >= 3)
                 {
                     btnDemarrer.Text = "Arreter";
@@ -301,9 +305,9 @@ namespace Quiz_Animal
 
                     int[] MemoryId = new int[2] { -1, -1 }; // Initialise a -1 a cause que 0 peut etre un id valide.
 
-                    int RandomLbl = random.Next(1, 4);
+                    int RandomLbl = random.Next(1, 4); // Label aleatoire
 
-                    int RandomId = random.Next(Convert.ToInt32(BD.Count()));
+                    int RandomId = random.Next(Convert.ToInt32(BD.Count())); // Id aleatoire.
 
                     indexprecedent = RandomId;
 
@@ -312,14 +316,15 @@ namespace Quiz_Animal
 
                     IndexLblReponse = RandomLbl;
 
-                    var query = Query<ImagesQuiz>.EQ(p => p.Id, RandomId);
+                    var query = Query<ImagesQuiz>.EQ(p => p.Id, RandomId); // Cherche avec l'id random
 
-                    ImagesQuiz IQ = BD.FindOne(query);
+                    ImagesQuiz IQ = BD.FindOne(query); 
                     pictureBox1.Image = Image.FromFile(IQ.Path);
                     txtrichDetails.Text = IQ.Details;
 
                     for (int i = 0; i < 3; i++)
-                    {
+                    { 
+                        // Placement de la reponse ou des 2 autres
                         if (RandomLbl == 1)
                         {
                             lblReponse1.Text = IQ.Nom;
@@ -335,7 +340,7 @@ namespace Quiz_Animal
                             lblReponse3.Text = IQ.Nom;
                             RandomLbl = 1;
                         }
-
+                        // Random avec confirmations de ne pas avoir utiliser le terminer.
                         do
                         {
                             RandomId = random.Next(Convert.ToInt32(BD.Count()));
@@ -367,7 +372,7 @@ namespace Quiz_Animal
             }
 
         }
-
+        // Ajoute des images dans le dossier et la BD.
         private void btnAjouter_Click(object sender, EventArgs e)
         {
             var client = new MongoClient("mongodb://localhost");
@@ -419,7 +424,7 @@ namespace Quiz_Animal
                 }
             }
         }
-
+        // Change l'image dans le quiz. Meme Code et Demarrer Sauf pour la fin ... 
         private void btnSuivant_Click(object sender, EventArgs e)
         {
             dejaclick = true;
